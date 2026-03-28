@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
-
+//UnionRamas
 namespace Periodico_Digital.CapaDatos.Entidades
 {
     [Table("Autores")]
