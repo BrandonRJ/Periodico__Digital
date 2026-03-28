@@ -202,6 +202,7 @@
     <Compile Include="CapaDatos\Entidades\Autor.cs" />
     <Compile Include="CapaDatos\Entidades\Categoria.cs" />
     <Compile Include="CapaDatos\Entidades\Noticia.cs" />
+    <Compile Include="CapaNegocio\NoticiaService.cs" />
     <Compile Include="Contact.aspx.cs">
       <DependentUpon>Contact.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -244,7 +245,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="CapaNegocio\" />
     <Folder Include="CapaPresentacion\" />
     <Folder Include="Controllers\" />
   </ItemGroup>
