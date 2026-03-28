@@ -245,7 +245,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="CapaNegocio\" />
     <Folder Include="CapaPresentacion\" />
     <Folder Include="Controllers\" />
   </ItemGroup>
