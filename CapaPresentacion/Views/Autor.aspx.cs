@@ -1,52 +1,82 @@
-﻿using Periodico_Digital.CapaDatos;
+﻿using System;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using Periodico_Digital.CapaNegocio;
 using Periodico_Digital.CapaDatos.Entidades;
-using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
 
-namespace Periodico_Digital.CapaNegocio
+namespace Periodico__Digital.CapaPresentacion.Views
 {
-    public class AutorNegocio
+    public partial class Autor : System.Web.UI.Page
     {
-        
-        public List<Autor> ObtenerReporteAutores()
+        private AutorNegocio autorNegocio = new AutorNegocio();
+
+        protected void Page_Load(object sender, EventArgs e)
         {
-            using (var db = new PeriodicoContext())
+            if (!IsPostBack)
             {
-                // Incluimos las noticias para poder contar cuántas tiene cada autor (Punto 3.b)
-                return db.Autores.Include(a => a.Noticias).ToList();
+                CargarLista();
             }
         }
 
-        // 2. Registrar Autor (Resuelve el error de la línea 48 en tu imagen)
-        public bool RegistrarAutor(string nombre, string email)
+        private void CargarLista()
         {
-            using (var db = new PeriodicoContext())
+            try
             {
-                var nuevoAutor = new Autor
-                {
-                    Nombre = nombre,
-                    Email = email
-                };
-                db.Autores.Add(nuevoAutor);
-                return db.SaveChanges() > 0;
+               
+                gvAutores.DataSource = autorNegocio.ObtenerReporteAutores();
+                gvAutores.DataBind();
+            }
+            catch (Exception ex)
+            {
+                MostrarAlerta("Error al cargar: " + ex.Message);
             }
         }
 
-        // 3. Eliminar Autor (Resuelve el error de la fila deleting)
-        public bool EliminarAutor(int id)
+        protected void btnGuardar_Click(object sender, EventArgs e)
         {
-            using (var db = new PeriodicoContext())
+            try
             {
-                var autor = db.Autores.Find(id);
-                if (autor != null)
+                // AJUSTE: Usamos los IDs de tu diseño (txtNombreAutor y txtEmailAutor)
+                string nombre = txtNombreAutor.Text.Trim();
+                string email = txtEmailAutor.Text.Trim();
+
+                if (autorNegocio.RegistrarAutor(nombre, email))
                 {
-                    db.Autores.Remove(autor);
-                    return db.SaveChanges() > 0;
+                    txtNombreAutor.Text = "";
+                    txtEmailAutor.Text = "";
+                    CargarLista();
+                    MostrarAlerta("Autor guardado correctamente.");
                 }
-                return false;
             }
+            catch (Exception ex)
+            {
+                MostrarAlerta("Error: " + ex.Message);
+            }
+        }
+
+        protected void gvAutores_RowDeleting(object sender, GridViewDeleteEventArgs e)
+        {
+            try
+            {
+                // AJUSTE: Usamos DataKeyNames="IdAutor" como pusiste en tu diseño
+                int id = Convert.ToInt32(gvAutores.DataKeys[e.RowIndex].Value);
+
+                if (autorNegocio.EliminarAutor(id))
+                {
+                    CargarLista();
+                    MostrarAlerta("Autor eliminado.");
+                }
+            }
+            catch (Exception )
+            {
+                MostrarAlerta("No se puede eliminar porque tiene noticias asociadas.");
+            }
+        }
+
+        private void MostrarAlerta(string mensaje)
+        {
+            string script = $"alert('{mensaje.Replace("'", "\\'")}');";
+            ScriptManager.RegisterStartupScript(this, GetType(), "alert", script, true);
         }
     }
 }
