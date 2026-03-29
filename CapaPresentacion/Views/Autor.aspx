@@ -14,9 +14,11 @@
             <div class="form-group">
                 <label>Correo:</label>
                 <asp:TextBox ID="txtEmailAutor" runat="server" CssClass="form-control" />
-                <asp:RegularExpressionValidator ID="revEmail" runat="server" ControlToValidate="txtEmailAutor"
+                <asp:RequiredFieldValidator ID="rfvEmail" runat="server" ControlToValidate="txtEmailAutor" ErrorMessage="¡Atención! El correo no puede quedar vacío." 
+                 CssClass="error" Display="Dynamic" />
+                <asp:RegularExpressionValidator ID="revEmail" runat="server" ControlToValidate="txtEmailAutor" ErrorMessage="El formato del correo es inválido (ejemplo: usuario@dominio.com)."
                     ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*"
-                    ErrorMessage="Correo inválido" CssClass="error" Display="Dynamic" />
+                     CssClass="error" Display="Dynamic" />
             </div>
             <div class="form-botones">
                 <asp:Button ID="btnGuardar" runat="server" Text="Guardar Autor" CssClass="btn btn-primary"
