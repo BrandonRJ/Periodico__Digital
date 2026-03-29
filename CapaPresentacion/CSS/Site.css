@@ -145,3 +145,32 @@ nav a:hover {
     margin-top: 20px;
     text-align: right;
 }
+/* Efecto de iluminación al pasar el mouse */
+.tabla-inventario tr:hover {
+    background-color: #f1f4f9;
+    transition: background-color 0.2s ease;
+}
+
+/* Redondear las esquinas superiores de la tabla */
+.tabla-inventario {
+    border-radius: 8px 8px 0 0;
+    overflow: hidden; /* Necesario para el borde redondeado */
+    border: 1px solid #e0e0e0;
+}
+
+/* Estilo para el número de noticias (Badge) */
+.badge-conteo {
+    background-color: #3498db;
+    color: white;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+/* Ajuste para que las celdas no se vean apretadas */
+.tabla-inventario td {
+    color: #444;
+    font-size: 14px;
+    vertical-align: middle;
+}

@@ -108,7 +108,7 @@
   <ItemGroup>
     <Content Include="About.aspx" />
     <Content Include="CapaPresentacion\CSS\Site.css" />
-    <Content Include="CapaPresentacion\Views\Autor.aspx" />
+    <Content Include="CapaPresentacion\Views\Autores.aspx" />
     <Content Include="CapaPresentacion\Views\Categorias.aspx" />
     <Content Include="CapaPresentacion\Views\Noticias.aspx" />
     <Content Include="Contact.aspx" />
@@ -208,6 +208,8 @@
     <Compile Include="CapaDatos\Entidades\Categoria.cs" />
     <Compile Include="CapaDatos\Entidades\Noticia.cs" />
     <Compile Include="CapaDatos\PeriodicoContext.cs" />
+    <Compile Include="CapaNegocio\AutorNegocio.cs" />
+    <Compile Include="CapaNegocio\CategoriaNegocio.cs" />
     <Compile Include="CapaNegocio\NoticiaService.cs" />
     <Compile Include="CapaPresentacion\Site.Master.cs">
       <DependentUpon>Site.Master</DependentUpon>
@@ -216,11 +218,12 @@
     <Compile Include="CapaPresentacion\Site.Master.designer.cs">
       <DependentUpon>Site.Master</DependentUpon>
     </Compile>
-    <Compile Include="CapaPresentacion\Views\Autor.aspx.cs">
-      <DependentUpon>Autor.aspx</DependentUpon>
+    <Compile Include="CapaPresentacion\Views\Autores.aspx.cs">
+      <DependentUpon>Autores.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="CapaPresentacion\Views\Autor.aspx.designer.cs">
-      <DependentUpon>Autor.aspx</DependentUpon>
+    <Compile Include="CapaPresentacion\Views\Autores.aspx.designer.cs">
+      <DependentUpon>Autores.aspx</DependentUpon>
     </Compile>
     <Compile Include="CapaPresentacion\Views\Categorias.aspx.cs">
       <DependentUpon>Categorias.aspx</DependentUpon>
