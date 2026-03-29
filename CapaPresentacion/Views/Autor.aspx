@@ -30,6 +30,7 @@
                 AutoGenerateColumns="False"
                 DataKeyNames="Id"
                 OnRowDeleting="gvAutores_RowDeleting"
+                OnSelectedIndexChanged="gvAutores_SelectedIndexChanged"
                 CssClass="tabla-inventario"
                 GridLines="None">
 
@@ -49,7 +50,7 @@
 
                     <asp:TemplateField HeaderText="Acciones" ItemStyle-Width="150px">
                         <ItemTemplate>
-                            <asp:LinkButton ID="btnEdit" runat="server" Text="Editar" CssClass="btn-accion edit" CausesValidation="false"/>
+                            <asp:LinkButton ID="btnEdit" runat="server" Text="Editar" CssClass="btn-accion edit" CommandName="Select" CausesValidation="false"/>
                             <asp:LinkButton ID="btnDelete" runat="server" Text="Eliminar" CssClass="btn-accion delete"
                                 OnClientClick="return confirm('¿Desea eliminar este autor?');" CommandName="Delete" CausesValidation="false" />
                         </ItemTemplate>

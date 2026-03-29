@@ -15,7 +15,7 @@ namespace Periodico_Digital.CapaNegocio
             using (var db = new PeriodicoContext())
             {
                 //Include para que el GridView pueda contar las noticias
-                
+
                 return db.Autores.Include(a => a.Noticias).ToList();
             }
         }
@@ -25,11 +25,20 @@ namespace Periodico_Digital.CapaNegocio
         {
             using (var db = new PeriodicoContext())
             {
+                // VALIDACIÓN: ¿Ya existe un autor con este correo?
+                // Usamos .Any() que es muy rápido porque solo devuelve true/false
+                bool existe = db.Autores.Any(a => a.Email.ToLower() == email.ToLower());
+
+                if (existe)
+                {
+                    // Lanzamos una excepción que capturaremos en la Vista 
+                    throw new Exception("Ya existe un autor registrado con ese correo electrónico.");
+                }
                 // Creamos el nuevo autor con los datos que vienen de la pantalla
                 var nuevoAutor = new Autor
                 {
                     Nombre = nombre,
-                    Email = email 
+                    Email = email
                 };
 
                 db.Autores.Add(nuevoAutor);
@@ -55,5 +64,29 @@ namespace Periodico_Digital.CapaNegocio
         {
             return ObtenerReporteAutores();
         }
+
+        internal bool ActualizarAutor(int id, string nombre, string email)
+        {
+            // 1. Usamos el contexto de la base de datos
+            using (var db = new PeriodicoContext())
+            {
+                // 2. Buscamos al autor original por su ID
+                var autorExistente = db.Autores.Find(id);
+
+                if (autorExistente != null)
+                {
+                    // 3. Modificamos sus propiedades con los nuevos datos
+                    autorExistente.Nombre = nombre;
+                    autorExistente.Email = email;
+
+                    // 4. Guardamos los cambios. SaveChanges() devuelve el número de filas afectadas.
+                    // Si es mayor a 0, significa que la actualización fue exitosa.
+                    return db.SaveChanges() > 0;
+                }
+
+                return false; // No se encontró el autor
+            }
+        }
     }
 }
+        

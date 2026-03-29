@@ -17,6 +17,22 @@ namespace Periodico__Digital.CapaPresentacion.Views
                 CargarLista();
             }
         }
+        protected void gvAutores_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            // 1. Obtenemos la fila que se seleccionó
+            GridViewRow fila = gvAutores.SelectedRow;
+
+            // 2. Pasamos los textos a los TextBox de arriba
+            // Nota: HttpUtility.HtmlDecode limpia caracteres raros como &nbsp;
+            txtNombreAutor.Text = Server.HtmlDecode(fila.Cells[0].Text);
+            txtEmailAutor.Text = Server.HtmlDecode(fila.Cells[1].Text);
+
+            // 3. Guardamos el ID en el ViewState para saber que estamos EDITANDO y no CREANDO
+            ViewState["IdAutorEdicion"] = gvAutores.SelectedDataKey.Value;
+
+            // 4. Cambiamos el texto del botón para que el usuario sepa qué está haciendo
+            btnGuardar.Text = "Actualizar Autor";
+        }
 
         private void CargarLista()
         {
@@ -36,16 +52,29 @@ namespace Periodico__Digital.CapaPresentacion.Views
         {
             try
             {
-                // AJUSTE: Usamos los IDs de tu diseño (txtNombreAutor y txtEmailAutor)
                 string nombre = txtNombreAutor.Text.Trim();
                 string email = txtEmailAutor.Text.Trim();
 
-                if (autorNegocio.RegistrarAutor(nombre, email))
+                // Verificamos si tenemos un ID guardado en el ViewState
+                if (ViewState["IdAutorEdicion"] != null)
                 {
-                    txtNombreAutor.Text = "";
-                    txtEmailAutor.Text = "";
-                    CargarLista();
-                    MostrarAlerta("Autor guardado correctamente.");
+                    // --- MODO EDICIÓN ---
+                    int id = Convert.ToInt32(ViewState["IdAutorEdicion"]);
+
+                    if (autorNegocio.ActualizarAutor(id, nombre, email))
+                    {
+                        MostrarAlerta("Autor actualizado con éxito.");
+                        FinalizarEdicion();
+                    }
+                }
+                else
+                {
+                    // --- MODO REGISTRO NUEVO ---
+                    if (autorNegocio.RegistrarAutor(nombre, email))
+                    {
+                        MostrarAlerta("Autor registrado con éxito.");
+                        FinalizarEdicion();
+                    }
                 }
             }
             catch (Exception ex)
@@ -54,6 +83,16 @@ namespace Periodico__Digital.CapaPresentacion.Views
             }
         }
 
+        // Método auxiliar para limpiar todo después de guardar/actualizar
+        private void FinalizarEdicion()
+        {
+            txtNombreAutor.Text = "";
+            txtEmailAutor.Text = "";
+            btnGuardar.Text = "Guardar Autor";
+            ViewState["IdAutorEdicion"] = null; // Limpiamos el ID para que el próximo sea nuevo
+            gvAutores.SelectedIndex = -1;       // Quitamos la selección de la tabla
+            CargarLista();                      // ¡ESTO ES LO QUE REFRESCARÁ LA LISTA!
+        }
         protected void gvAutores_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
             try
