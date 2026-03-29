@@ -108,6 +108,7 @@
   <ItemGroup>
     <Content Include="About.aspx" />
     <Content Include="CapaPresentacion\CSS\Site.css" />
+    <Content Include="CapaPresentacion\Views\Autor.aspx" />
     <Content Include="Contact.aspx" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
@@ -208,9 +209,17 @@
     <Compile Include="CapaNegocio\NoticiaService.cs" />
     <Compile Include="CapaPresentacion\Site.Master.cs">
       <DependentUpon>Site.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="CapaPresentacion\Site.Master.designer.cs">
       <DependentUpon>Site.Master</DependentUpon>
+    </Compile>
+    <Compile Include="CapaPresentacion\Views\Autor.aspx.cs">
+      <DependentUpon>Autor.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CapaPresentacion\Views\Autor.aspx.designer.cs">
+      <DependentUpon>Autor.aspx</DependentUpon>
     </Compile>
     <Compile Include="Contact.aspx.cs">
       <DependentUpon>Contact.aspx</DependentUpon>
@@ -247,7 +256,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="CapaPresentacion\Views\" />
     <Folder Include="Controllers\Models\" />
   </ItemGroup>
   <ItemGroup>
