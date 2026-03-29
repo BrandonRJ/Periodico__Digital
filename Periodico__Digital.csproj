@@ -208,6 +208,8 @@
     <Compile Include="CapaDatos\Entidades\Categoria.cs" />
     <Compile Include="CapaDatos\Entidades\Noticia.cs" />
     <Compile Include="CapaDatos\PeriodicoContext.cs" />
+    <Compile Include="CapaNegocio\AutorNegocio.cs" />
+    <Compile Include="CapaNegocio\CategoriaNegocio.cs" />
     <Compile Include="CapaNegocio\NoticiaService.cs" />
     <Compile Include="CapaPresentacion\Site.Master.cs">
       <DependentUpon>Site.Master</DependentUpon>
@@ -218,6 +220,7 @@
     </Compile>
     <Compile Include="CapaPresentacion\Views\Autor.aspx.cs">
       <DependentUpon>Autor.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="CapaPresentacion\Views\Autor.aspx.designer.cs">
       <DependentUpon>Autor.aspx</DependentUpon>
