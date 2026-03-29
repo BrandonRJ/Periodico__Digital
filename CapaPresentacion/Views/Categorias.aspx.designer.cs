@@ -33,6 +33,24 @@ namespace Periodico__Digital.CapaPresentacion.Views
         protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvCat;
 
         /// <summary>
+        /// Control TextDescripcionmat.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox TextDescripcionmat;
+
+        /// <summary>
+        /// Control rfvmat.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvmat;
+
+        /// <summary>
         /// Control btnGuardarCat.
         /// </summary>
         /// <remarks>
