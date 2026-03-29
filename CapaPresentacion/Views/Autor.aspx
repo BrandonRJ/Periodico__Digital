@@ -29,7 +29,13 @@
                 <Columns>
                     <asp:BoundField DataField="Nombre" HeaderText="Autor" />
                     <asp:BoundField DataField="Email" HeaderText="Correo" />
-                    <asp:BoundField DataField="TotalNoticias" HeaderText="Noticias Registradas" ItemStyle-HorizontalAlign="Center" />
+
+
+                    <asp:TemplateField HeaderText="Noticias Registradas" ItemStyle-HorizontalAlign="Center">
+                        <ItemTemplate>
+                            <%# Eval("Noticias.Count") %>
+                        </ItemTemplate>
+                    </asp:TemplateField>
 
                     <asp:TemplateField HeaderText="Acciones">
                         <ItemTemplate>
