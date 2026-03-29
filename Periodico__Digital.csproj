@@ -203,6 +203,7 @@
     <Compile Include="CapaDatos\Entidades\Categoria.cs" />
     <Compile Include="CapaDatos\Entidades\Noticia.cs" />
     <Compile Include="CapaDatos\PeriodicoContext.cs" />
+    <Compile Include="CapaNegocio\NoticiaService.cs" />
     <Compile Include="Contact.aspx.cs">
       <DependentUpon>Contact.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
