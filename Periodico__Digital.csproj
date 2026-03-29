@@ -126,6 +126,7 @@
     <Content Include="Content\bootstrap.rtl.css" />
     <Content Include="Content\bootstrap.rtl.min.css" />
     <Content Include="Content\Site.css" />
+    <Content Include="Controllers\Java.js" />
     <Content Include="Default.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
@@ -247,7 +248,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="CapaPresentacion\Views\" />
-    <Folder Include="Controllers\" />
+    <Folder Include="Controllers\Models\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
