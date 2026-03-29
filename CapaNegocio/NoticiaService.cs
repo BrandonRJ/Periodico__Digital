@@ -1,5 +1,4 @@
-﻿using Periodico__Digital.CapaDatos.Entidades;
-using Periodico_Digital.CapaDatos;
+﻿using Periodico_Digital.CapaDatos;
 using Periodico_Digital.CapaDatos.Entidades;
 using System;
 using System.Collections.Generic;
