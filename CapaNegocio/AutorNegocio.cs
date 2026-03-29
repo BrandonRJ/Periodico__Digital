@@ -3,61 +3,57 @@ using Periodico_Digital.CapaDatos.Entidades;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Data.Entity; // <--- AGREGAR ESTO PARA EL .INCLUDE
+using System.Data.Entity;
 
 namespace Periodico_Digital.CapaNegocio
 {
     public class AutorNegocio
     {
-        // 1. LISTAR CON REPORTE (Punto 3.b)
-        public List<Autor> ListarAutores()
+        // 1. LISTAR CON REPORTE
+        public List<Autor> ObtenerReporteAutores()
         {
             using (var db = new PeriodicoContext())
             {
-                // Agregamos .Include para que el GridView pueda contar las noticias
+                //Include para que el GridView pueda contar las noticias
+                
                 return db.Autores.Include(a => a.Noticias).ToList();
             }
         }
 
-        // 2. INSERTAR AUTOR
-        public bool Insertar(string nombre)
+        // 2. REGISTRAR AUTOR
+        public bool RegistrarAutor(string nombre, string email)
         {
             using (var db = new PeriodicoContext())
             {
-                // Si su entidad Autor tiene Email, recuerden agregarlo aquí
-                db.Autores.Add(new Autor { Nombre = nombre });
+                // Creamos el nuevo autor con los datos que vienen de la pantalla
+                var nuevoAutor = new Autor
+                {
+                    Nombre = nombre,
+                    Email = email 
+                };
+
+                db.Autores.Add(nuevoAutor);
                 return db.SaveChanges() > 0;
             }
         }
 
-        // 3. ELIMINAR AUTOR (Opcional pero recomendado para "Gestionar")
-        public bool Eliminar(int id)
+        // 3. ELIMINAR AUTOR
+        public bool EliminarAutor(int id)
         {
             using (var db = new PeriodicoContext())
             {
                 var autor = db.Autores.Find(id);
-                if (autor != null)
-                {
-                    db.Autores.Remove(autor);
-                    return db.SaveChanges() > 0;
-                }
-                return false;
+                if (autor == null)
+                    throw new Exception("El ID " + id + " no existe en la base de datos.");
+
+                db.Autores.Remove(autor);
+                return db.SaveChanges() > 0;
             }
         }
 
-        internal object ObtenerReporteAutores()
+        public List<Autor> ListarAutores()
         {
-            throw new NotImplementedException();
-        }
-
-        internal bool RegistrarAutor(string nombre, string email)
-        {
-            throw new NotImplementedException();
-        }
-
-        internal bool EliminarAutor(int id)
-        {
-            throw new NotImplementedException();
+            return ObtenerReporteAutores();
         }
     }
 }

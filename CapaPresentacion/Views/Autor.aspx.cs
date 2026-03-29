@@ -58,21 +58,36 @@ namespace Periodico__Digital.CapaPresentacion.Views
         {
             try
             {
-                // AJUSTE: Usamos DataKeyNames="IdAutor" como pusiste en tu diseño
                 int id = Convert.ToInt32(gvAutores.DataKeys[e.RowIndex].Value);
 
                 if (autorNegocio.EliminarAutor(id))
                 {
-                    CargarLista();
-                    MostrarAlerta("Autor eliminado.");
+                   
+                    {
+                        gvAutores.SelectedIndex = -1; // Limpia cualquier selección previa
+                        CargarLista();
+                        MostrarAlerta("Autor eliminado correctamente.");
+                    }
+                }
+                else
+                {
+                    MostrarAlerta("No se encontró el autor para eliminar.");
                 }
             }
-            catch (Exception )
+            catch (Exception ex)
             {
-                MostrarAlerta("No se puede eliminar porque tiene noticias asociadas.");
+                // REGLA DE ORO: Solo culpar a las noticias si el error viene de la base de datos
+                if (ex.InnerException != null && ex.InnerException.Message.Contains("REFERENCE"))
+                {
+                    MostrarAlerta("No se puede eliminar: el autor tiene noticias asociadas.");
+                }
+                else
+                {
+                    // Esto te dirá si el error es de conexión, de nulos, etc.
+                    MostrarAlerta("Error técnico: " + ex.Message);
+                }
             }
         }
-
         private void MostrarAlerta(string mensaje)
         {
             string script = $"alert('{mensaje.Replace("'", "\\'")}');";
