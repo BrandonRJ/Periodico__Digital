@@ -10,7 +10,7 @@ namespace Periodico_Digital.CapaDatos
     public class PeriodicoContext : DbContext
     {
         // Este nombre debe estar en tu Web.config
-        public PeriodicoContext() : base("name=PeriodicoConn")
+        public PeriodicoContext() : base("name=PeriodicoContext")
         {
         }
 
