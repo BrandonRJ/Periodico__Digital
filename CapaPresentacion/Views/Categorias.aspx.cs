@@ -39,47 +39,64 @@ namespace Periodico__Digital.CapaPresentacion.Views
         // Evento del botón Guardar (Cumple Punto 3.c)
         protected void btnGuardarCat_Click(object sender, EventArgs e)
         {
+            // Solo ejecutamos si los validadores (RequiredField) pasaron
             if (Page.IsValid)
             {
                 try
                 {
-                    string descripcion = txtNombreCat.Text.Trim();
+                    // 1. Capturamos ambos valores de los TextBox corregidos
+                    string nombre = txtNombreCat.Text.Trim();
+                    string descripcion = TextDescripcionmat.Text.Trim();
 
-                    if (catNegocio.Insertar(descripcion))
+                    // 2. Llamamos al método enviando AMBOS datos
+                    // El método 'Insertar' ahora debe recibir (string, string)
+                    if (catNegocio.Insertar(nombre, descripcion))
                     {
-                        txtNombreCat.Text = ""; // Limpiar campo
-                        CargarLista(); // Refrescar tabla
-                        MostrarAlerta("Categoría guardada con éxito.");
+                        // Solo si se guardó: limpiamos y refrescamos
+                        txtNombreCat.Text = "";
+                        TextDescripcionmat.Text = "";
+                        CargarLista();
+                        MostrarAlerta("¡Guardado correctamente!");
                     }
                 }
                 catch (Exception ex)
                 {
-                    MostrarAlerta("Error al guardar: " + ex.Message);
+                    // Si la pareja ya existe, el 'throw' de la capa de negocio nos trae aquí
+                    CargarLista();
+                    MostrarAlerta("AVISO: " + ex.Message);
                 }
             }
         }
-
         // Evento para Eliminar (Cumple con 'Gestionar')
         protected void gvCategorias_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
             try
             {
-                // Obtenemos el ID de la fila seleccionada
                 int idCat = Convert.ToInt32(gvCategorias.DataKeys[e.RowIndex].Value);
 
                 if (catNegocio.Eliminar(idCat))
                 {
                     CargarLista();
-                    MostrarAlerta("Categoría eliminada correctamente.");
+                    MostrarAlerta(" ¡Listo! La categoría se eliminó de la base de datos.");
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                // Importante: Si la categoría tiene noticias, EF lanzará un error de FK
-                MostrarAlerta("No se puede eliminar la categoría porque tiene noticias vinculadas.");
+                CargarLista(); // Refrescamos para que la fila no desaparezca visualmente
+
+                // Si el error es por noticias vinculadas (FK)
+                if (ex.InnerException != null && ex.InnerException.Message.Contains("REFERENCE"))
+                {
+                    // Solo el mensaje directo
+                    MostrarAlerta("No se puede eliminar: Esta categoría tiene noticias asociadas.");
+                }
+                else
+                {
+                    // Mensaje corto para cualquier otro error
+                    MostrarAlerta("Error: No se pudo eliminar el registro.Esta categoría tiene noticias asociadas");
+                }
             }
         }
-
         // Métodos de apoyo
         private void MostrarAlerta(string mensaje)
         {

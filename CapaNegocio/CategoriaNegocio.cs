@@ -21,36 +21,36 @@ namespace Periodico_Digital.CapaNegocio
         }
 
         // 2. INSERTAR 
-        public bool Insertar(string nombreCategoria)
+        public bool Insertar(string nombre, string descripcion)
         {
             using (var db = new PeriodicoContext())
             {
-                // Validación de redundancia: ¿Existe ya este nombre?
-                if (db.Categorias.Any(c => c.Nombre.ToLower() == nombreCategoria.Trim().ToLower()))
+                // 1. Limpiamos los datos para que " Fútbol" sea igual a "fútbol"
+                string n = nombre.Trim().ToLower();
+                string d = descripcion.Trim().ToLower();
+
+                // 2
+                // SQL buscará: ¿Hay alguien que se llame 'n' Y que su descripción sea 'd'?
+                bool existePareja = db.Categorias.Any(c =>
+                    c.Nombre.ToLower() == n &&
+                    c.Descripcion.ToLower() == d
+                );
+
+                if (existePareja)
                 {
-                    throw new Exception("Redundancia detectada: La categoría '" + nombreCategoria + "' ya existe.");
+                    // Si la combinación ya existe, lanzamos el error de inmediato
+                    throw new Exception("Ya existe el registro '" + nombre + "' con la descripción '" + descripcion + "'.");
                 }
 
-                db.Categorias.Add(new Categoria
+                // 3. Si no existe la combinación, se guarda normal
+                var nueva = new Categoria
                 {
-                    Nombre = nombreCategoria.Trim(),
-                    Descripcion = nombreCategoria.Trim()
-                });
+                    Nombre = nombre.Trim(),
+                    Descripcion = descripcion.Trim()
+                };
+
+                db.Categorias.Add(nueva);
                 return db.SaveChanges() > 0;
-            }
-        }
-        // 3. ELIMINAR (Para completar la gestión)
-        public bool Eliminar(int id)
-        {
-            using (var db = new PeriodicoContext())
-            {
-                var cat = db.Categorias.Find(id);
-                if (cat != null)
-                {
-                    db.Categorias.Remove(cat);
-                    return db.SaveChanges() > 0;
-                }
-                return false;
             }
         }
         public bool Actualizar(int id, string nuevoNombre)
@@ -74,6 +74,26 @@ namespace Periodico_Digital.CapaNegocio
                     return db.SaveChanges() > 0;
                 }
                 return false;
+            }
+        }
+
+        internal bool Eliminar(int idCat)
+        {
+            using (var db = new PeriodicoContext())
+            {
+                // 1. Buscamos la categoría real en la DB usando el ID
+                var categoria = db.Categorias.Find(idCat);
+
+                if (categoria != null)
+                {
+                    // 2. Si existe, la marcamos para borrar
+                    db.Categorias.Remove(categoria);
+
+                    // 3. Guardamos los cambios. Si se borró algo, devuelve true.
+                    return db.SaveChanges() > 0;
+                }
+
+                return false; // No se encontró la categoría
             }
         }
     }

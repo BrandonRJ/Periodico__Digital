@@ -9,7 +9,12 @@
                 <label>Nombre de Categoría:</label>
                 <asp:TextBox ID="txtNombreCat" runat="server" CssClass="form-control" placeholder="Ej. Deportes" />
                 <asp:RequiredFieldValidator ID="rfvCat" runat="server" ControlToValidate="txtNombreCat"
-                    ErrorMessage="La descripción es obligatoria" CssClass="error" Display="Dynamic" />
+                 ErrorMessage="La nombre es obligatorio" CssClass="error" Display="Dynamic" />
+              
+                <label>Descripción Categoría:</label>
+                <asp:TextBox ID="TextDescripcionmat" runat="server" CssClass="form-control" placeholder="Ej. descripcion " />
+                <asp:RequiredFieldValidator ID="rfvmat" runat="server" ControlToValidate="TextDescripcionmat" 
+                ErrorMessage="La descripción es obligatoria" CssClass="error" Display="Dynamic" />
             </div>
             <div class="form-botones">
                 <asp:Button ID="btnGuardarCat" runat="server" Text="Guardar Categoría"
@@ -30,7 +35,9 @@
                 <AlternatingRowStyle CssClass="tabla-row-alt" />
 
                 <Columns>
-                    <asp:BoundField DataField="Descripcion" HeaderText="Nombre de Categoría" />
+                    <asp:BoundField DataField="Nombre" HeaderText="Nombre de Categoría" />
+
+                    <asp:BoundField DataField="Descripcion" HeaderText="Descripcion Categoría" />
 
                     <asp:TemplateField HeaderText="Noticias" ItemStyle-HorizontalAlign="Center">
                         <ItemTemplate>
@@ -43,7 +50,7 @@
                     <asp:TemplateField HeaderText="Acciones">
                         <ItemTemplate>
                             <asp:LinkButton ID="btnDelete" runat="server" Text="Eliminar"
-                                CommandName="Delete" CssClass="btn-accion delete"
+                                CommandName="Delete" CssClass="btn-accion delete" CausesValidation="false"
                                 OnClientClick="return confirm('¿Desea eliminar esta categoría?');" />
                         </ItemTemplate>
                     </asp:TemplateField>
