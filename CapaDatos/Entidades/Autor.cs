@@ -1,5 +1,4 @@
-﻿using Periodico__Digital.CapaDatos.Entidades;
-using Periodico_Digital.CapaDatos.Entidades;
+﻿using Periodico_Digital.CapaDatos.Entidades;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -27,5 +26,12 @@ namespace Periodico_Digital.CapaDatos.Entidades
 
         // Relación: Un autor tiene muchas noticias
         public virtual ICollection<Noticia> Noticias { get; set; }
+
+        [NotMapped]
+        public int TotalNoticias
+        {
+            get { return Noticias != null ? Noticias.Count : 0; }
+        }
     }
+
 }
