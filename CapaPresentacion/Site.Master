@@ -54,7 +54,7 @@
 
         <footer class="container text-center mt-5 mb-4">
             <hr />
-            <p>&copy; <%: DateTime.Now.Year %> - Periódico Virtual InfoWeb</p>
+            <p>&copy; <%: DateTime.Now.Year %> - Periódico Virtual </p>
             <p>Estudiantes: <strong>Brandon y Ramsés</strong> | Programación</p>
         </footer>
     </form>

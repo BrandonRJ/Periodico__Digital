@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Gestión de Autores" Language="C#" MasterPageFile="~/CapaPresentacion/Site.Master" AutoEventWireup="true" CodeBehind="Autores.aspx.cs" Inherits="Periodico__Digital.CapaPresentacion.Views.Autor" %>
+﻿<%@ Page Title="Gestión de Autores" Language="C#" MasterPageFile="~/CapaPresentacion/Site.Master" AutoEventWireup="true" CodeBehind="Autor.aspx.cs" Inherits="Periodico__Digital.CapaPresentacion.Views.Autor" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <div class="contenido-wrapper">
@@ -28,7 +28,7 @@
             <h3>Lista de Autores</h3>
             <asp:GridView ID="gvAutores" runat="server"
                 AutoGenerateColumns="False"
-                DataKeyNames="IdAutor"
+                DataKeyNames="Id"
                 OnRowDeleting="gvAutores_RowDeleting"
                 CssClass="tabla-inventario"
                 GridLines="None">
@@ -49,9 +49,9 @@
 
                     <asp:TemplateField HeaderText="Acciones" ItemStyle-Width="150px">
                         <ItemTemplate>
-                            <asp:LinkButton ID="btnEdit" runat="server" Text="Editar" CssClass="btn-accion edit" />
+                            <asp:LinkButton ID="btnEdit" runat="server" Text="Editar" CssClass="btn-accion edit" CausesValidation="false"/>
                             <asp:LinkButton ID="btnDelete" runat="server" Text="Eliminar" CssClass="btn-accion delete"
-                                OnClientClick="return confirm('¿Desea eliminar este autor?');" CommandName="Delete" />
+                                OnClientClick="return confirm('¿Desea eliminar este autor?');" CommandName="Delete" CausesValidation="false" />
                         </ItemTemplate>
                     </asp:TemplateField>
                 </Columns>
