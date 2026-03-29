@@ -19,6 +19,7 @@ namespace Periodico_Digital.CapaNegocio
                 return db.Autores.Include(a => a.Noticias).ToList();
             }
         }
+       
 
         // 2. REGISTRAR AUTOR
         public bool RegistrarAutor(string nombre, string email)
