@@ -53,11 +53,11 @@ namespace Periodico_Digital.CapaNegocio
                 return db.SaveChanges() > 0;
             }
         }
-        public bool Actualizar(int id, string nuevoNombre)
+        public bool Actualizar(int id, string nuevoNombre, string nuevaDescripcion)
         {
             using (var db = new PeriodicoContext())
             {
-                // Validar redundancia: ¿Hay OTRA categoría (diferente ID) con este mismo nombre?
+                // 1. Validar redundancia: ¿Hay OTRA categoría con el mismo nombre pero diferente ID?
                 bool redundante = db.Categorias.Any(c =>
                     c.Nombre.ToLower() == nuevoNombre.Trim().ToLower() && c.Id != id);
 
@@ -66,11 +66,15 @@ namespace Periodico_Digital.CapaNegocio
                     throw new Exception("No se puede actualizar: Ya existe otra categoría llamada '" + nuevoNombre + "'.");
                 }
 
+                // 2. Buscar la categoría por ID
                 var cat = db.Categorias.Find(id);
                 if (cat != null)
                 {
+                    // 3. Asignar los valores correspondientes
                     cat.Nombre = nuevoNombre.Trim();
-                    cat.Descripcion = nuevoNombre.Trim();
+                    cat.Descripcion = nuevaDescripcion.Trim();
+
+                    // 4. Guardar y retornar true si hubo cambios
                     return db.SaveChanges() > 0;
                 }
                 return false;

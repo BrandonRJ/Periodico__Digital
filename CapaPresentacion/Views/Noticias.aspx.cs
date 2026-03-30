@@ -72,7 +72,7 @@ namespace Periodico__Digital.CapaPresentacion.Views
                 // 1. Creación del objeto con Fecha Automática 
                 var nuevaNoticia = new Noticia
                 {
-                    Titulo = txtTitulo.Text.Trim(),
+                    Titulo = txtNoticia.Text.Trim(),
                     Contenido = txtContenido.Text.Trim(),
                     AutorId = int.Parse(ddlAutor.SelectedValue),
                     CategoriaId = int.Parse(ddlCategoria.SelectedValue),
@@ -100,7 +100,7 @@ namespace Periodico__Digital.CapaPresentacion.Views
         // Método para limpiar los campos del formulario
         private void LimpiarFormulario()
         {
-            txtTitulo.Text = "";
+            txtNoticia.Text = "";
             txtContenido.Text = "";
             ddlAutor.SelectedIndex = 0;
             ddlCategoria.SelectedIndex = 0;
