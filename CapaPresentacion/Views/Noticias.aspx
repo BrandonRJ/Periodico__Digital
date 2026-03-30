@@ -29,11 +29,9 @@
                 </asp:RadioButtonList>
             </div>
             <div class="form-botones">
-                <asp:Button ID="btnGuardarNoticia" runat="server" Text="Guardar Noticia"
-                    OnClick="btnGuardarNoticia_Click" CssClass="btn btn-primary" />
+                <asp:Button ID="btnGuardarNoticia" runat="server" Text="Guardar Noticia" OnClick="btnGuardarNoticia_Click" CssClass="btn btn-primary" />
             </div>
         </div>
-
         <div class="contenedor-seccion">
             <asp:GridView ID="gvNoticias" runat="server" AutoGenerateColumns="false" CssClass="tabla-inventario">
                 <HeaderStyle CssClass="tabla-header" />

@@ -50,36 +50,46 @@ namespace Periodico__Digital.CapaPresentacion.Views
 
         protected void btnGuardar_Click(object sender, EventArgs e)
         {
-            try
+            // 1. Primero verificamos que los validadores (Email obligatorio) estén OK
+            if (Page.IsValid)
             {
-                string nombre = txtNombreAutor.Text.Trim();
-                string email = txtEmailAutor.Text.Trim();
-
-                // Verificamos si tenemos un ID guardado en el ViewState
-                if (ViewState["IdAutorEdicion"] != null)
+                try
                 {
-                    // --- MODO EDICIÓN ---
-                    int id = Convert.ToInt32(ViewState["IdAutorEdicion"]);
+                    // 2. Capturamos los datos de la pantalla
+                    string nombre = txtNombreAutor.Text.Trim();
+                    string email = txtEmailAutor.Text.Trim();
 
-                    if (autorNegocio.ActualizarAutor(id, nombre, email))
+                    // 3. Verificamos si estamos EDITANDO o REGISTRANDO NUEVO
+                    if (ViewState["IdAutorEdicion"] != null)
                     {
-                        MostrarAlerta("Autor actualizado con éxito.");
-                        FinalizarEdicion();
+                        // --- MODO EDICIÓN ---
+                        int id = Convert.ToInt32(ViewState["IdAutorEdicion"]);
+
+                        if (autorNegocio.ActualizarAutor(id, nombre, email))
+                        {
+                            MostrarAlerta("Autor actualizado con éxito.");
+                            FinalizarEdicion(); // Este método debería limpiar campos y el ViewState
+                        }
+                    }
+                    else
+                    {
+                        // --- MODO REGISTRO NUEVO ---
+                        if (autorNegocio.RegistrarAutor(nombre, email))
+                        {
+                            MostrarAlerta("Autor registrado con éxito.");
+                            FinalizarEdicion(); // Limpia el formulario para el siguiente registro
+                        }
                     }
                 }
-                else
+                catch (Exception ex)
                 {
-                    // --- MODO REGISTRO NUEVO ---
-                    if (autorNegocio.RegistrarAutor(nombre, email))
-                    {
-                        MostrarAlerta("Autor registrado con éxito.");
-                        FinalizarEdicion();
-                    }
+                    // 4. Si el correo está duplicado o falta un dato, el error saltará aquí
+                    MostrarAlerta("Error: " + ex.Message);
+
+                    // Opcional: Si tienes el label de mensaje, también puedes usarlo
+                    // lblMensaje.Text = ex.Message;
+                    // lblMensaje.ForeColor = System.Drawing.Color.Red;
                 }
-            }
-            catch (Exception ex)
-            {
-                MostrarAlerta("Error: " + ex.Message);
             }
         }
 

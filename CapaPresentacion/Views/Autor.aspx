@@ -8,16 +8,27 @@
             <div class="form-group">
                 <label>Nombre:</label>
                 <asp:TextBox ID="txtNombreAutor" runat="server" CssClass="form-control" />
+
+                <%-- VALIDACIÓN: Impide que el nombre se envíe en blanco --%>
                 <asp:RequiredFieldValidator ID="rfvNombre" runat="server" ControlToValidate="txtNombreAutor"
                     ErrorMessage="Nombre requerido" CssClass="error" Display="Dynamic" />
             </div>
+
             <div class="form-group">
                 <label>Correo:</label>
                 <asp:TextBox ID="txtEmailAutor" runat="server" CssClass="form-control" />
+
+                <%-- VALIDACIÓN: Obliga a ingresar un correo (no permite campo vacío) --%>
+                <asp:RequiredFieldValidator ID="rfvEmail" runat="server" ControlToValidate="txtEmailAutor"
+                    ErrorMessage="¡Atención! El correo no puede quedar vacío."
+                    CssClass="error" Display="Dynamic" />
+
+                <%-- VALIDACIÓN: Verifica que el texto tenga estructura de email (usuario@dominio.com) --%>
                 <asp:RegularExpressionValidator ID="revEmail" runat="server" ControlToValidate="txtEmailAutor"
-                    ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*"
-                    ErrorMessage="Correo inválido" CssClass="error" Display="Dynamic" />
+                    ErrorMessage="El formato del correo es inválido (ejemplo: usuario@dominio.com)."
+                    ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*" CssClass="error" Display="Dynamic" />
             </div>
+
             <div class="form-botones">
                 <asp:Button ID="btnGuardar" runat="server" Text="Guardar Autor" CssClass="btn btn-primary"
                     OnClick="btnGuardar_Click" />
@@ -43,14 +54,14 @@
 
                     <asp:TemplateField HeaderText="Noticias" ItemStyle-HorizontalAlign="Center">
                         <ItemTemplate>
-
                             <span class="badge-conteo"><%# Eval("Noticias.Count") %></span>
                         </ItemTemplate>
                     </asp:TemplateField>
 
                     <asp:TemplateField HeaderText="Acciones" ItemStyle-Width="150px">
                         <ItemTemplate>
-                            <asp:LinkButton ID="btnEdit" runat="server" Text="Editar" CssClass="btn-accion edit" CommandName="Select" CausesValidation="false"/>
+                            <%-- CausesValidation="false" permite editar/borrar sin que los validadores de arriba den error --%>
+                            <asp:LinkButton ID="btnEdit" runat="server" Text="Editar" CssClass="btn-accion edit" CommandName="Select" CausesValidation="false" />
                             <asp:LinkButton ID="btnDelete" runat="server" Text="Eliminar" CssClass="btn-accion delete"
                                 OnClientClick="return confirm('¿Desea eliminar este autor?');" CommandName="Delete" CausesValidation="false" />
                         </ItemTemplate>
