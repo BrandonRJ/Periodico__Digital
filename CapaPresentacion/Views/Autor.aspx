@@ -6,7 +6,7 @@
             <h3>Registro de Autor</h3>
             <hr />
             <div class="form-group">
-                <label>Nombre:</label>
+                <label>Nombre Completo:</label>
                 <asp:TextBox ID="txtNombreAutor" runat="server" CssClass="form-control" />
 
                 <%-- VALIDACIÓN: Impide que el nombre se envíe en blanco --%>
