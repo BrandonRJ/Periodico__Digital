@@ -5,8 +5,8 @@
         <div class="contenedor-seccion">
             <h2>Gestión de Noticias</h2>
             <div class="form-group">
-                <label>Título de la Noticia:</label>
-                <asp:TextBox ID="txtTitulo" runat="server" CssClass="form-control" />
+                <label>Noticia:</label>
+                <asp:TextBox ID="txtNoticia" runat="server" CssClass="form-control" />
             </div>
             <div class="form-group">
                 <label>Contenido:</label>
@@ -37,7 +37,7 @@
                 <HeaderStyle CssClass="tabla-header" />
                 <AlternatingRowStyle CssClass="tabla-row-alt" />
                 <Columns>
-                    <asp:BoundField DataField="Titulo" HeaderText="Título" />
+                    <asp:BoundField DataField="Titulo" HeaderText="Noticia" />
                     <asp:BoundField DataField="Autor.Nombre" HeaderText="Autor" />
                     <asp:BoundField DataField="Categoria.Descripcion" HeaderText="Categoría" />
                     <asp:BoundField DataField="FechaPublicacion" HeaderText="Fecha" DataFormatString="{0:dd/MM/yyyy}" />
