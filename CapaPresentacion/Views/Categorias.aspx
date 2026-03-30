@@ -33,6 +33,7 @@
                 CssClass="tabla-inventario"
                 DataKeyNames="Id"
                 OnRowDeleting="gvCategorias_RowDeleting"
+                OnSelectedIndexChanged="gvCategorias_SelectedIndexChanged"
                 GridLines="None">
 
                 <HeaderStyle CssClass="tabla-header" />
@@ -54,8 +55,8 @@
                     <asp:TemplateField HeaderText="Acciones">
                         <ItemTemplate>
                             <%-- CausesValidation="false" permite borrar sin que se disparen las alertas de los TextBox de arriba --%>
-                            <asp:LinkButton ID="btnDelete" runat="server" Text="Eliminar"
-                                CommandName="Delete" CssClass="btn-accion delete" CausesValidation="false"
+                            <asp:LinkButton ID="btnEdit" runat="server" Text="Editar" CssClass="btn-accion edit" CommandName="Select" CausesValidation="false" />
+                            <asp:LinkButton ID="btnDelete" runat="server" Text="Eliminar" CommandName="Delete" CssClass="btn-accion delete" CausesValidation="false"
                                 OnClientClick="return confirm('¿Desea eliminar esta categoría?');" />
                         </ItemTemplate>
                     </asp:TemplateField>
