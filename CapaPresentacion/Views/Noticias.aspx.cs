@@ -69,7 +69,7 @@ namespace Periodico__Digital.CapaPresentacion.Views
                     return;
                 }
 
-                // 1. Creación del objeto con Fecha Automática 
+                //  Creación del objeto con Fecha Automática 
                 var nuevaNoticia = new Noticia
                 {
                     Titulo = txtNoticia.Text.Trim(),
@@ -80,15 +80,15 @@ namespace Periodico__Digital.CapaPresentacion.Views
                     FechaPublicacion = DateTime.Now
                 };
 
-                // 2. Inserción mediante la Capa de Negocio
+                //  Inserción mediante la Capa de Negocio
                 var service = new NoticiaService();
                 service.Insertar(nuevaNoticia);
 
-                // 3. CAMBIO: Limpiar el formulario y refrescar
+                //  CAMBIO: Limpiar el formulario y refrescar
                 LimpiarFormulario();
                 CargarGrid();
 
-                // 4. CAMBIO: Mostrar alerta de éxito
+                //  CAMBIO: Mostrar alerta de éxito
                 MostrarAlerta("Noticia guardada exitosamente.");
             }
             catch (Exception ex)
