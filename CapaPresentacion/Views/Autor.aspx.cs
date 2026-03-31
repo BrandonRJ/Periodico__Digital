@@ -19,18 +19,18 @@ namespace Periodico__Digital.CapaPresentacion.Views
         }
         protected void gvAutores_SelectedIndexChanged(object sender, EventArgs e)
         {
-            // 1. Obtenemos la fila que se seleccionó
+            //  Obtenemos la fila que se seleccionó
             GridViewRow fila = gvAutores.SelectedRow;
 
-            // 2. Pasamos los textos a los TextBox de arriba
+            //  Pasamos los textos a los TextBox de arriba
             // Nota: HttpUtility.HtmlDecode limpia caracteres raros como &nbsp;
             txtNombreAutor.Text = Server.HtmlDecode(fila.Cells[0].Text);
             txtEmailAutor.Text = Server.HtmlDecode(fila.Cells[1].Text);
 
-            // 3. Guardamos el ID en el ViewState para saber que estamos EDITANDO y no CREANDO
+            //  Guardamos el ID en el ViewState para saber que estamos EDITANDO y no CREANDO
             ViewState["IdAutorEdicion"] = gvAutores.SelectedDataKey.Value;
 
-            // 4. Cambiamos el texto del botón para que el usuario sepa qué está haciendo
+            //  Cambiamos el texto del botón para que el usuario sepa qué está haciendo
             btnGuardar.Text = "Actualizar Autor";
         }
 
@@ -50,16 +50,16 @@ namespace Periodico__Digital.CapaPresentacion.Views
 
         protected void btnGuardar_Click(object sender, EventArgs e)
         {
-            // 1. Primero verificamos que los validadores (Email obligatorio) estén OK
+            //  Primero verificamos que los validadores (Email obligatorio) estén OK
             if (Page.IsValid)
             {
                 try
                 {
-                    // 2. Capturamos los datos de la pantalla
+                    //  Capturamos los datos de la pantalla
                     string nombre = txtNombreAutor.Text.Trim();
                     string email = txtEmailAutor.Text.Trim();
 
-                    // 3. Verificamos si estamos EDITANDO o REGISTRANDO NUEVO
+                    //  Verificamos si estamos EDITANDO o REGISTRANDO NUEVO
                     if (ViewState["IdAutorEdicion"] != null)
                     {
                         // --- MODO EDICIÓN ---
@@ -83,12 +83,10 @@ namespace Periodico__Digital.CapaPresentacion.Views
                 }
                 catch (Exception ex)
                 {
-                    // 4. Si el correo está duplicado o falta un dato, el error saltará aquí
+                    //  Si el correo está duplicado o falta un dato, el error saltará aquí
                     MostrarAlerta("Error: " + ex.Message);
 
-                    // Opcional: Si tienes el label de mensaje, también puedes usarlo
-                    // lblMensaje.Text = ex.Message;
-                    // lblMensaje.ForeColor = System.Drawing.Color.Red;
+                  
                 }
             }
         }
@@ -125,7 +123,7 @@ namespace Periodico__Digital.CapaPresentacion.Views
             }
             catch (Exception ex)
             {
-                // REGLA DE ORO: Solo culpar a las noticias si el error viene de la base de datos
+                //  Solo culpar a las noticias si el error viene de la base de datos
                 if (ex.InnerException != null && ex.InnerException.Message.Contains("REFERENCE"))
                 {
                     MostrarAlerta("No se puede eliminar: el autor tiene noticias asociadas.");

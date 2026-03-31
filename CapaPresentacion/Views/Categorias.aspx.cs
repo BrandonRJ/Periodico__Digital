@@ -73,11 +73,11 @@ namespace Periodico__Digital.CapaPresentacion.Views
                 }
                 catch (Exception ex)
                 {
-                    // Este catch cierra el bloque try de la línea 41
+                    // Este catch cierra el bloque try 
                     MostrarAlerta("AVISO: " + ex.Message);
                 }
-            } 
-        } 
+            }
+        }
 
         protected void gvCategorias_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -91,17 +91,7 @@ namespace Periodico__Digital.CapaPresentacion.Views
             ViewState["IdCategoriaEdicion"] = gvCategorias.SelectedDataKey.Value;
 
             btnGuardarCat.Text = "Actualizar Categoría";
-        }
-
-        // Método de apoyo para limpiar los campos
-        private void LimpiarFormulario()
-        {
-            txtNombreCat.Text = "";
-            TextDescripcionmat.Text = "";
-            ViewState["IdCategoriaEdicion"] = null; // Resetear modo edición
-            btnGuardarCat.Text = "Guardar Categoría";
-        }
-
+        }                    /*Metodo de eliminacion de categoria*/
         protected void gvCategorias_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
             try
