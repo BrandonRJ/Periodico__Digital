@@ -25,7 +25,7 @@
         
       <header class="header-master text-center py-4" style="background-color: #f8f9fa; border-bottom: 3px solid #004a99;">
     <div class="container">
-        <h1 class="display-4 fw-bold" style="color: #004a99;">Periódico Virtual</h1>
+        <h1 class="display-4 fw-bold" style="color: #004a99;">Periódico Virtual InfoWeb</h1>
         
         <nav class="navbar navbar-expand-sm navbar-light">
             <div class="container-fluid">
