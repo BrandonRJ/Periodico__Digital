@@ -199,3 +199,264 @@ nav a:hover {
     font-weight: bold;
 }
 
+
+.pagina-noticias {
+    width: 100% !important;
+    border-collapse: collapse !important;
+    margin-top: 15px !important;
+}
+
+
+.Noticia {
+    background-color: #fff;
+    border: 4px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+/* Configuración General */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f7f6;
+    margin: 0;
+    padding: 0;
+}
+
+/* Estilos de la MasterPage (Header y Nav) */
+header-master {
+    background-color: #2c3e50;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    display: block;
+}
+
+header-master h1 {
+     margin: 0;
+     font-size: 24px;
+}
+
+nav {
+    margin-top: 10px;
+}
+
+nav a {
+    color: #ecf0f1;
+    text-decoration: none;
+    margin: 0 10px;
+    font-weight: bold;
+}
+
+nav a:hover {
+    text-decoration: underline;
+}
+
+/* Contenedores */
+.contenido-wrapper {
+    padding: 20px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.contenedor-seccion {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    margin-bottom: 20px;
+}
+
+/* Estilos de Tabla (GridView) */
+.tabla-inventario {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+}
+
+.tabla-header {
+    background-color: #34495e;
+    color: white;
+    text-align: left;
+}
+
+.tabla-inventario th, .tabla-inventario td {
+    padding: 12px;
+    border-bottom: 1px solid #ddd;
+}
+
+.tabla-row-alt {
+    background-color: #f9f9f9;
+}
+
+/* Botones */
+.btn {
+    padding: 8px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.btn-nuevo, .btn-primary {
+    background-color: #27ae60;
+    color: white;
+}
+
+.btn-secondary, .btn-cancelar {
+    background-color: #95a5a6;
+    color: white;
+    margin-left: 10px;
+}
+
+.btn-accion {
+    padding: 4px 8px;
+    font-size: 12px;
+    margin-right: 5px;
+    border-radius: 3px;
+    color: white;
+    border: none;
+}
+
+.edit {
+    background-color: #2980b9;
+}
+
+.delete {
+    background-color: #c0392b;
+}
+
+/* Formularios */
+.form-container {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+    .form-group label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+    }
+
+.form-control {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box; 
+}
+
+.error {
+    color: #e74c3c;
+    font-size: 12px;
+    margin-top: 5px;
+}
+
+.form-botones {
+    margin-top: 20px;
+    text-align: right;
+}
+/* Efecto de iluminación al pasar el mouse */
+.tabla-inventario tr:hover {
+    background-color: #f1f4f9;
+    transition: background-color 0.2s ease;
+}
+
+/* Redondear las esquinas superiores de la tabla */
+.tabla-inventario {
+    border-radius: 8px 8px 0 0;
+    overflow: hidden; /* Necesario para el borde redondeado */
+    border: 1px solid #e0e0e0;
+}
+
+/* Estilo para el número de noticias (Badge) */
+.badge-conteo {
+    background-color: #3498db;
+    color: white;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+/* Ajuste para que las celdas no se vean apretadas */
+.tabla-inventario td {
+    color: #444;
+    font-size: 14px;
+    vertical-align: middle;
+}
+
+
+.ddl-group {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f7f6;
+    margin: auto;
+    padding: 10px 200px;
+    border-radius: 12px;
+}
+
+.ddl-group select {
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    padding: 5px 10px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 14px;
+    background-color: #fff;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.ddl-group select option{
+    font-weight: bold;
+}
+
+
+.pagina-noticias {
+    width: 100% !important;
+    border-collapse: collapse !important;
+    
+    border: none !important;
+}
+
+
+.Noticias {
+    background-color: #fff;
+    border: 4px #e0e0e0; 
+    border-radius: 10px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.encabezado {
+    background-color: #2c3e50;
+    border: 4px;
+    color: white;
+    padding: 1px;
+    text-align: center;
+    display: block;
+}
+
+.contenido-noticia {
+    background-color:antiquewhite;
+    border: 4px;
+    padding: 20px;
+    text-align: center;
+    display: block;
+}
+
+.informacion {
+    background-color: #2c3e50;
+    border: 4px;
+    color: white;
+    padding: 1px;
+    text-align: center;
+    display: block;
+}
+
