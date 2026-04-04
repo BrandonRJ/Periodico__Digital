@@ -39,7 +39,7 @@
                                 <!-- Parte inferior, categoria y fecha -->
 
                                 <div class="informacion">
-                                    <span class="noticia-categoria">Categoria: <%# Eval("Categoria.Descripcion") %></span>
+                                    <span class="noticia-categoria">Categoria: <%# Eval("Categoria.Nombre") %></span>
                                     <br />
                                     <span class="noticia-fecha">Fecha de publicacion: <%# Eval("FechaPublicacion", "{0:dd/MM/yyyy}") %></span>
                                 </div>

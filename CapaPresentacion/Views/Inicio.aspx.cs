@@ -56,7 +56,7 @@ namespace Periodico__Digital.CapaPresentacion.Views
                 // Cargar Categorías
                 var categorias = db.Categorias.ToList();
                 ddlCategoria.DataSource = categorias;
-                ddlCategoria.DataTextField = "Descripcion";
+                ddlCategoria.DataTextField = "Nombre";
                 ddlCategoria.DataValueField = "Id";
                 ddlCategoria.DataBind();
                 ddlCategoria.Items.Insert(0, new ListItem("-- Filtrar por categoria --", ""));
